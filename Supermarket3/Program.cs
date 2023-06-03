@@ -84,7 +84,7 @@
 
                 while (isPayed == false)
                 {
-                    int totalPrice = client.CountCartPrice();
+                    int totalPrice = client.CalculateCartPrice();
 
                     if (client.Money >= totalPrice)
                     {
@@ -168,18 +168,18 @@
 
             for (int i = 0; i < productsToBuy; i++)
             {
-                _shoppingCart.AddProduct(products[_random.Next(0, products.Length - 1)]);
+                _shoppingCart.AddProduct(products[_random.Next(0, products.Length)]);
             }
         }
 
-        public int CountCartPrice()
+        public int CalculateCartPrice()
         {
             Product[] products = _shoppingCart.GetProducts();
             int totalPrice = 0;
 
             if (products.Length > 0)
             {
-                for (int i = 0; i < products.Length - 1; i++)
+                for (int i = 0; i < products.Length; i++)
                 {
                     totalPrice += products[i].Price;
                 }
@@ -196,7 +196,7 @@
         public void RemoveFromCart()
         {
             Product[] products = _shoppingCart.GetProducts();
-            int itemIndex = _random.Next(0, products.Length - 1);
+            int itemIndex = _random.Next(0, products.Length);
             Console.WriteLine($"У клиента не хватило денег, товар - \"{products[itemIndex].Name}\" выложен из корзины");
             _shoppingCart.RemoveProduct(products[itemIndex]);
         }
